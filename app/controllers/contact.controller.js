@@ -92,7 +92,7 @@ exports.deleteAll = async (_req, res, next) => {
 exports.findAllFevorite = async (_req, res, next) => {
     try {
         const contactService = new ContactService(MongoDB.client);
-        const documents = await contactService.findAllFevorite();
+        const documents = await contactService.findFevorite();
         return res.send(documents);
     } catch (error) {
         return next(
