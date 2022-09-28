@@ -1,24 +1,25 @@
 const { ObjectId } = require("mongodb");
 
 class ContactService {
-    constructor(client){
+    constructor(client) {
         this.Contact = client.db().collection("contacts");
     }
-    
-    extractConactData(payload) {
+
+    extractConactData(payload){
         const contact = {
             name: payload.name,
             email: payload.email,
             address: payload.address,
             phone: payload.phone,
-            favorite: payload.favorite
+            favorite: payload.favorite,
         };
-        Objects.keys(contact).forEach(
+        Object.keys(contact).forEach(
             (key) => contact[key] === undefined && delete contact[key]
         );
         return contact;
     }
-    async create(payload) {
+
+    async create(payload){
         const contact = this.extractConactData(payload);
         const result = await this.Contact.findOneAndUpdate(
             contact,
@@ -27,7 +28,7 @@ class ContactService {
         );
         return result.value;
     }
-
+    
     async find(filter){
         const cursor = await this.Contact.find(filter);
         return await cursor.toArray();
