@@ -4,7 +4,7 @@ class ContactService {
     constructor(client){
         this.Contact = client.db().collection("contacts");
     }
-
+    
     extractConactData(payload) {
         const contact = {
             name: payload.name,
